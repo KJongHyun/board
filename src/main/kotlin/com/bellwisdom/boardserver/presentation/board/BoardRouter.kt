@@ -2,7 +2,6 @@ package com.bellwisdom.boardserver.presentation.board
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.http.MediaType
 import org.springframework.web.reactive.function.server.router
 
 @Configuration
@@ -16,8 +15,9 @@ class BoardRouter(
 
     @Bean
     fun boardRoute() = router {
-        (API_PATH and contentType(MediaType.APPLICATION_JSON)).nest {
+        (API_PATH).nest {
             POST("", boardHandler::write)
+            GET("/{postId}", boardHandler::read)
         }
     }
 }
