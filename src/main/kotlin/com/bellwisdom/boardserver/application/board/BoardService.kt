@@ -1,6 +1,6 @@
 package com.bellwisdom.boardserver.application.board
 
-import com.bellwisdom.boardserver.domain.Post
+import com.bellwisdom.boardserver.domain.post.Post
 import com.bellwisdom.boardserver.infra.board.PostRepository
 import com.bellwisdom.boardserver.infra.logger.BoardLogger
 import com.bellwisdom.boardserver.presentation.board.PostDto
@@ -25,7 +25,13 @@ class BoardService(
         return Mono.fromCallable {
             postRepository.findByIdOrNull(postId)
         }.switchIfEmpty(Mono.error(RuntimeException("post is null -> postId:$postId"))).flatMap {
-            Mono.just(PostDto(it!!.title, it!!.contents))
+            with(it!!) {
+                Mono.just(PostDto(
+                    category = category,
+                    title = title,
+                    contents = contents
+                ))
+            }
         }
     }
 }
