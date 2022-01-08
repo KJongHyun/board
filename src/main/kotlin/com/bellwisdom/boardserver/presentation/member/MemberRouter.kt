@@ -1,4 +1,4 @@
-package com.bellwisdom.boardserver.presentation.board
+package com.bellwisdom.boardserver.presentation.member
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -7,19 +7,20 @@ import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.router
 
 @Configuration
-class BoardRouter(
-    private val boardHandler: BoardHandler
+class MemberRouter(
+    private val memberHandler: MemberHandler
 ) {
 
     companion object {
-        private const val API_PATH = "/v1/board"
+        const val API_PATH = "/v1/member"
     }
 
     @Bean
-    fun boardRoute(): RouterFunction<ServerResponse> = router {
+    fun memberRoute(): RouterFunction<ServerResponse> = router {
         (API_PATH).nest {
-            POST("", boardHandler::write)
-            GET("/{postId}", boardHandler::read)
+            POST("/login", memberHandler::login)
+            POST("/logout", memberHandler::logout)
         }
     }
+
 }
