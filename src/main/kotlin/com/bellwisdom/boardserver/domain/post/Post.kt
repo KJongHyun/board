@@ -2,6 +2,7 @@ package com.bellwisdom.boardserver.domain.post
 
 import com.bellwisdom.boardserver.domain.BaseEntity
 import com.bellwisdom.boardserver.presentation.board.PostDto
+import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
@@ -11,7 +12,9 @@ class Post private constructor(
     @Enumerated(EnumType.STRING)
     val category: Category,
     var title: String,
-    var contents: String
+    var contents: String,
+    var status: PostStatus = PostStatus.READABLE,
+    var deletedAt: LocalDateTime? = null
 ) : BaseEntity() {
 
     companion object {
@@ -20,9 +23,18 @@ class Post private constructor(
         }
     }
 
+    fun delete() {
+        this.status = PostStatus.DELETED
+        this.deletedAt = LocalDateTime.now()
+    }
 }
 
 enum class Category {
     MARKET,
     STOCK
+}
+
+enum class PostStatus {
+    READABLE,
+    DELETED
 }

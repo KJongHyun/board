@@ -20,6 +20,7 @@ class BoardRouter(
         (API_PATH).nest {
             POST("", boardHandler::write)
             GET("/{postId}", boardHandler::read)
+            DELETE("/{postId}", boardHandler::delete)
         }
     }
 }

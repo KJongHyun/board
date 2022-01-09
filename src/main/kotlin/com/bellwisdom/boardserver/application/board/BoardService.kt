@@ -24,14 +24,25 @@ class BoardService(
     fun read(postId: Long): Mono<PostDto> {
         return Mono.fromCallable {
             postRepository.findByIdOrNull(postId)
-        }.switchIfEmpty(Mono.error(RuntimeException("post is null -> postId:$postId"))).flatMap {
+        }.switchIfEmpty(Mono.error(RuntimeException("[post 리드 실패] post is null -> postId:$postId"))).flatMap {
             with(it!!) {
-                Mono.just(PostDto(
-                    category = category,
-                    title = title,
-                    contents = contents
-                ))
+                Mono.just(
+                    PostDto(
+                        category = category,
+                        title = title,
+                        contents = contents
+                    )
+                )
             }
+        }
+    }
+
+    fun delete(postId: Long): Mono<Unit> {
+        return Mono.fromCallable {
+            postRepository.findByIdOrNull(postId)
+        }.switchIfEmpty(Mono.error(RuntimeException("[post 삭제 실패] post is null -> postId:$postId"))).flatMap {
+            it!!.delete()
+            Mono.empty()
         }
     }
 }

@@ -23,4 +23,10 @@ class BoardHandler(private val boardService: BoardService) {
             ServerResponse.ok().build()
         }
     }
+
+    fun delete(serverRequest: ServerRequest): Mono<ServerResponse> {
+        return boardService.delete(serverRequest.pathVariable("postId").toLong()).flatMap {
+            ServerResponse.ok().build()
+        }
+    }
 }
