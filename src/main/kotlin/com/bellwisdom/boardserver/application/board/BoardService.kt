@@ -7,6 +7,7 @@ import com.bellwisdom.boardserver.presentation.board.PostDto
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
+import javax.transaction.Transactional
 
 @Service
 class BoardService(
@@ -37,6 +38,7 @@ class BoardService(
         }
     }
 
+    @Transactional
     fun delete(postId: Long): Mono<Unit> {
         return Mono.fromCallable {
             postRepository.findByIdOrNull(postId)

@@ -13,9 +13,12 @@ class Post private constructor(
     val category: Category,
     var title: String,
     var contents: String,
-    var status: PostStatus = PostStatus.READABLE,
-    var deletedAt: LocalDateTime? = null
 ) : BaseEntity() {
+
+    @Enumerated(EnumType.STRING)
+    var status: PostStatus = PostStatus.READABLE
+
+    private var deletedAt: LocalDateTime? = null
 
     companion object {
         fun of(postDto: PostDto): Post {
