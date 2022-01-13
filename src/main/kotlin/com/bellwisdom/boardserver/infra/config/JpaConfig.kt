@@ -17,7 +17,7 @@ class JpaConfig {
             this.jdbcUrl =
                 "jdbc:mysql://192.168.35.233:3306/dev_board?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true"
             this.username = "eclass"
-            this.password = "Elcass0925!"
+            this.password = "Eclass0925!"
         }
     }
 }

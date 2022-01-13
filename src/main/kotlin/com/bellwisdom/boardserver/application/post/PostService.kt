@@ -1,16 +1,16 @@
-package com.bellwisdom.boardserver.application.board
+package com.bellwisdom.boardserver.application.post
 
 import com.bellwisdom.boardserver.domain.post.Post
 import com.bellwisdom.boardserver.infra.board.PostRepository
 import com.bellwisdom.boardserver.infra.logger.BoardLogger
-import com.bellwisdom.boardserver.presentation.board.PostDto
+import com.bellwisdom.boardserver.presentation.post.PostDto
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
 import javax.transaction.Transactional
 
 @Service
-class BoardService(
+class PostService(
     private val postRepository: PostRepository
 ) {
 

@@ -1,7 +1,7 @@
 package com.bellwisdom.boardserver.domain.post
 
 import com.bellwisdom.boardserver.domain.BaseEntity
-import com.bellwisdom.boardserver.presentation.board.PostDto
+import com.bellwisdom.boardserver.presentation.post.PostDto
 import java.time.LocalDateTime
 import javax.persistence.*
 

@@ -1,4 +1,4 @@
-package com.bellwisdom.boardserver.presentation.board
+package com.bellwisdom.boardserver.presentation.post
 
 import com.bellwisdom.boardserver.domain.post.Category
 
