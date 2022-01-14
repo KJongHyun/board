@@ -1,8 +1,8 @@
 package com.bellwisdom.boardserver.application.post
 
 import com.bellwisdom.boardserver.domain.post.Post
-import com.bellwisdom.boardserver.infra.board.PostRepository
 import com.bellwisdom.boardserver.infra.logger.BoardLogger
+import com.bellwisdom.boardserver.infra.post.PostRepository
 import com.bellwisdom.boardserver.presentation.post.PostDto
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
