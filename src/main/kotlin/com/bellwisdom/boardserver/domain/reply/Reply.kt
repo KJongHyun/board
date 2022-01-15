@@ -15,12 +15,14 @@ class Reply(
     val member: Member,
     @ManyToOne
     @JoinColumn(name = "post_id", updatable = false)
-    val post: Post,
+    var post: Post,
     val contents: String
 ) : BaseEntity() {
     companion object {
-        fun of(member: Member, post: Post, replyDto: ReplyDto): Reply {
-            return Reply(member = member, post = post, contents = replyDto.contents)
+        fun write(member: Member, post: Post, replyDto: ReplyDto): Reply {
+            return Reply(member = member, post = post, contents = replyDto.contents).also {
+                post.addReply(it)
+            }
         }
     }
 }

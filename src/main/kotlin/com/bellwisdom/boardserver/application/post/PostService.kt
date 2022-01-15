@@ -1,5 +1,6 @@
 package com.bellwisdom.boardserver.application.post
 
+import com.bellwisdom.boardserver.domain.member.Member
 import com.bellwisdom.boardserver.domain.post.Post
 import com.bellwisdom.boardserver.infra.logger.BoardLogger
 import com.bellwisdom.boardserver.infra.post.PostRepository
@@ -17,7 +18,14 @@ class PostService(
     companion object : BoardLogger
 
     fun write(postDto: PostDto): Mono<Unit> {
-        return Mono.fromCallable { postRepository.save(Post.of(postDto)) }.flatMap {
+        return Mono.fromCallable {
+            postRepository.save(
+                Post.of(
+                    Member(email = "email", password = "password"),
+                    postDto
+                )
+            )
+        }.flatMap {
             Mono.empty()
         }
     }

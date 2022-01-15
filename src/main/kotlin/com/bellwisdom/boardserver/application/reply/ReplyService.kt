@@ -20,13 +20,10 @@ class ReplyService(
             postRepository.findByIdOrNull(replyDto.postId)
         }.switchIfEmpty(Mono.error(RuntimeException("[reply 쓰기 실패] post is null -> postId:${replyDto.postId}")))
             .flatMap { post ->
-                replyRepository.save(
-                    Reply(
-                        member = Member(email = "email", password = "password"),
-                        post = post!!,
-                        contents = replyDto.contents
-                    )
-                )
+                Reply.write(member = Member(email = "email", password = "password"), post!!, replyDto).let {
+                    replyRepository.save(it)
+                }
+
                 Mono.empty()
             }
     }
